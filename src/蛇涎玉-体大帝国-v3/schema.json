@@ -1,0 +1,190 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "terminal": {
+      "default": {
+        "date_location": "体大男生宿舍",
+        "scene_mode": "日常",
+        "scene_heat": 0
+      },
+      "type": "object",
+      "properties": {
+        "date_location": {
+          "type": "string"
+        },
+        "scene_mode": {
+          "type": "string"
+        },
+        "scene_heat": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        }
+      },
+      "required": [
+        "date_location",
+        "scene_mode",
+        "scene_heat"
+      ]
+    },
+    "jade": {
+      "default": {
+        "energy": 30,
+        "evolution": "碧绿",
+        "known_mechanisms": [
+          "蛇涎水"
+        ],
+        "ling_she_jiu_qi_unlocked": 0
+      },
+      "type": "object",
+      "properties": {
+        "energy": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "evolution": {
+          "type": "string"
+        },
+        "known_mechanisms": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ling_she_jiu_qi_unlocked": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 9
+        }
+      },
+      "required": [
+        "energy",
+        "evolution",
+        "known_mechanisms",
+        "ling_she_jiu_qi_unlocked"
+      ]
+    },
+    "current_slave": {
+      "default": "待初始化",
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "file_level": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 5
+            },
+            "slave_rank": {
+              "type": "string"
+            },
+            "shame_role": {
+              "type": "string"
+            },
+            "identity": {
+              "type": "string"
+            },
+            "body": {
+              "default": {
+                "rating": "未验货",
+                "cock_cm": 0,
+                "tags": []
+              },
+              "type": "object",
+              "properties": {
+                "rating": {
+                  "type": "string"
+                },
+                "cock_cm": {
+                  "type": "number"
+                },
+                "tags": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "rating",
+                "cock_cm",
+                "tags"
+              ]
+            },
+            "obedience": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "corruption": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "dependency": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "arousal": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            }
+          },
+          "required": [
+            "id",
+            "name",
+            "file_level",
+            "slave_rank",
+            "shame_role",
+            "identity",
+            "obedience",
+            "corruption",
+            "dependency",
+            "arousal"
+          ]
+        },
+        {
+          "type": "string",
+          "const": "待初始化"
+        }
+      ]
+    },
+    "archives": {
+      "default": {
+        "selected_profile_id": "",
+        "profile_count": 0,
+        "hidden_targets": []
+      },
+      "type": "object",
+      "properties": {
+        "selected_profile_id": {
+          "type": "string"
+        },
+        "profile_count": {
+          "type": "number"
+        },
+        "hidden_targets": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "selected_profile_id",
+        "profile_count",
+        "hidden_targets"
+      ]
+    }
+  }
+}
