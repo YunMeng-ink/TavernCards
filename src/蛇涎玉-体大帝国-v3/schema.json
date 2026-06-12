@@ -73,85 +73,137 @@
           "type": "object",
           "properties": {
             "id": {
+              "default": "",
               "type": "string"
             },
             "name": {
+              "default": "",
               "type": "string"
             },
             "file_level": {
+              "default": 0,
               "type": "number",
               "minimum": 0,
               "maximum": 5
             },
             "slave_rank": {
+              "default": "",
               "type": "string"
             },
             "shame_role": {
+              "default": "",
               "type": "string"
             },
             "identity": {
+              "default": "",
               "type": "string"
             },
-            "body": {
+            "body_profile": {
               "default": {
                 "rating": "未验货",
                 "cock_cm": 0,
-                "tags": []
+                "body_tags": [],
+                "sensitive_points": [],
+                "special_mods": []
               },
               "type": "object",
               "properties": {
                 "rating": {
+                  "default": "未验货",
                   "type": "string"
                 },
                 "cock_cm": {
+                  "default": 0,
                   "type": "number"
                 },
-                "tags": {
+                "body_tags": {
+                  "default": [],
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "sensitive_points": {
+                  "default": [],
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "special_mods": {
+                  "default": [],
                   "type": "array",
                   "items": {
                     "type": "string"
                   }
                 }
+              }
+            },
+            "psych": {
+              "default": {
+                "obedience": 0,
+                "corruption": 0,
+                "resistance": 100,
+                "dependency": 0
               },
-              "required": [
-                "rating",
-                "cock_cm",
-                "tags"
-              ]
+              "type": "object",
+              "properties": {
+                "obedience": {
+                  "default": 0,
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 100
+                },
+                "corruption": {
+                  "default": 0,
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 100
+                },
+                "resistance": {
+                  "default": 100,
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 100
+                },
+                "dependency": {
+                  "default": 0,
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 100
+                }
+              }
             },
-            "obedience": {
-              "type": "number",
-              "minimum": 0,
-              "maximum": 100
-            },
-            "corruption": {
-              "type": "number",
-              "minimum": 0,
-              "maximum": 100
-            },
-            "dependency": {
-              "type": "number",
-              "minimum": 0,
-              "maximum": 100
-            },
-            "arousal": {
-              "type": "number",
-              "minimum": 0,
-              "maximum": 100
+            "sex_state": {
+              "default": {
+                "arousal": 0,
+                "chastity": "无",
+                "anus_state": "未使用",
+                "semen_state": "空"
+              },
+              "type": "object",
+              "properties": {
+                "arousal": {
+                  "default": 0,
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 100
+                },
+                "chastity": {
+                  "default": "无",
+                  "type": "string"
+                },
+                "anus_state": {
+                  "default": "未使用",
+                  "type": "string"
+                },
+                "semen_state": {
+                  "default": "空",
+                  "type": "string"
+                }
+              }
             }
-          },
-          "required": [
-            "id",
-            "name",
-            "file_level",
-            "slave_rank",
-            "shame_role",
-            "identity",
-            "obedience",
-            "corruption",
-            "dependency",
-            "arousal"
-          ]
+          }
         },
         {
           "type": "string",

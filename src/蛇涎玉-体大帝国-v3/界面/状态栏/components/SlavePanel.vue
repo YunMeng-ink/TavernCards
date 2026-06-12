@@ -10,17 +10,17 @@
       <div class="slave-header">
         <span class="slave-name">{{ store.data.current_slave.name }}</span>
         <span class="slave-badge rank" :style="{ background: rankColor }">{{ store.data.current_slave.slave_rank }}</span>
-        <span class="slave-badge rating">{{ store.data.current_slave.body.rating }}</span>
+        <span class="slave-badge rating">{{ store.data.current_slave.body_profile.rating }}</span>
       </div>
 
       <div class="body-card">
         <div class="body-stat">
           <span class="body-label">评级</span>
-          <span class="body-val">{{ store.data.current_slave.body.rating }}</span>
+          <span class="body-val">{{ store.data.current_slave.body_profile.rating }}</span>
         </div>
         <div class="body-stat">
           <span class="body-label">长度</span>
-          <span class="body-val">{{ store.data.current_slave.body.cock_cm }}cm</span>
+          <span class="body-val">{{ store.data.current_slave.body_profile.cock_cm }}cm</span>
         </div>
         <div class="body-stat">
           <span class="body-label">身份</span>
@@ -32,43 +32,83 @@
         </div>
       </div>
 
-      <div class="tags-row" v-if="store.data.current_slave.body.tags.length">
+      <div class="tags-row" v-if="store.data.current_slave.body_profile.body_tags.length">
         <span
-          v-for="tag in store.data.current_slave.body.tags"
+          v-for="tag in store.data.current_slave.body_profile.body_tags"
           :key="tag"
           class="tag-pill"
           :style="{ background: tagColor(tag) }"
         >{{ tag }}</span>
       </div>
 
+      <div class="tags-row" v-if="store.data.current_slave.body_profile.sensitive_points.length">
+        <span
+          v-for="pt in store.data.current_slave.body_profile.sensitive_points"
+          :key="pt"
+          class="tag-pill"
+          style="background: #ec4899"
+        >敏感:{{ pt }}</span>
+      </div>
+
+      <div class="tags-row" v-if="store.data.current_slave.body_profile.special_mods.length">
+        <span
+          v-for="mod in store.data.current_slave.body_profile.special_mods"
+          :key="mod"
+          class="tag-pill"
+          style="background: #a78bfa"
+        >改造:{{ mod }}</span>
+      </div>
+
       <div class="stats-section">
         <div class="stat-row">
           <span class="stat-label">服从度</span>
           <div class="stat-track">
-            <div class="stat-fill" :style="{ width: store.data.current_slave.obedience + '%', background: '#60a5fa' }"></div>
+            <div class="stat-fill" :style="{ width: store.data.current_slave.psych.obedience + '%', background: '#60a5fa' }"></div>
           </div>
-          <span class="stat-value">{{ store.data.current_slave.obedience }}</span>
+          <span class="stat-value">{{ store.data.current_slave.psych.obedience }}</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">反抗度</span>
+          <div class="stat-track">
+            <div class="stat-fill" :style="{ width: store.data.current_slave.psych.resistance + '%', background: '#94a3b8' }"></div>
+          </div>
+          <span class="stat-value">{{ store.data.current_slave.psych.resistance }}</span>
         </div>
         <div class="stat-row">
           <span class="stat-label">淫堕度</span>
           <div class="stat-track">
-            <div class="stat-fill" :style="{ width: store.data.current_slave.corruption + '%', background: '#c084fc' }"></div>
+            <div class="stat-fill" :style="{ width: store.data.current_slave.psych.corruption + '%', background: '#c084fc' }"></div>
           </div>
-          <span class="stat-value">{{ store.data.current_slave.corruption }}</span>
+          <span class="stat-value">{{ store.data.current_slave.psych.corruption }}</span>
         </div>
         <div class="stat-row">
           <span class="stat-label">依赖度</span>
           <div class="stat-track">
-            <div class="stat-fill" :style="{ width: store.data.current_slave.dependency + '%', background: '#fb923c' }"></div>
+            <div class="stat-fill" :style="{ width: store.data.current_slave.psych.dependency + '%', background: '#fb923c' }"></div>
           </div>
-          <span class="stat-value">{{ store.data.current_slave.dependency }}</span>
+          <span class="stat-value">{{ store.data.current_slave.psych.dependency }}</span>
         </div>
         <div class="stat-row arousal">
           <span class="stat-label">兴奋度</span>
           <div class="stat-track">
-            <div class="stat-fill pulse" :style="{ width: store.data.current_slave.arousal + '%' }"></div>
+            <div class="stat-fill pulse" :style="{ width: store.data.current_slave.sex_state.arousal + '%' }"></div>
           </div>
-          <span class="stat-value">{{ store.data.current_slave.arousal }}</span>
+          <span class="stat-value">{{ store.data.current_slave.sex_state.arousal }}</span>
+        </div>
+      </div>
+
+      <div class="sex-state-row">
+        <div class="sex-chip">
+          <span class="sex-key">贞操</span>
+          <span class="sex-val">{{ store.data.current_slave.sex_state.chastity }}</span>
+        </div>
+        <div class="sex-chip">
+          <span class="sex-key">后穴</span>
+          <span class="sex-val">{{ store.data.current_slave.sex_state.anus_state }}</span>
+        </div>
+        <div class="sex-chip">
+          <span class="sex-key">精液</span>
+          <span class="sex-val">{{ store.data.current_slave.sex_state.semen_state }}</span>
         </div>
       </div>
     </template>
@@ -180,7 +220,7 @@ function tagColor(tag: string): string {
   display: flex;
   flex-wrap: wrap;
   gap: 4px;
-  margin-bottom: 10px;
+  margin-bottom: 6px;
 }
 
 .tag-pill {
@@ -244,7 +284,37 @@ function tagColor(tag: string): string {
   font-variant-numeric: tabular-nums;
 }
 
-.aarousal .stat-label {
+.arousal .stat-label {
   color: var(--c-accent);
+}
+
+.sex-state-row {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+  padding: 6px 8px;
+  background: var(--c-surface);
+  border: 1px solid var(--c-border);
+  border-radius: 6px;
+}
+
+.sex-chip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  gap: 2px;
+}
+
+.sex-key {
+  font-size: 0.6rem;
+  color: var(--c-text-muted);
+  text-transform: uppercase;
+}
+
+.sex-val {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--c-accent-light);
 }
 </style>

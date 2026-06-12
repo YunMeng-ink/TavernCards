@@ -11,21 +11,31 @@ export const Schema = z.object({
     ling_she_jiu_qi_unlocked: z.coerce.number().min(0).max(9)
   }).prefault({ energy: 30, evolution: '碧绿', known_mechanisms: ['蛇涎水'], ling_she_jiu_qi_unlocked: 0 }),
   current_slave: z.object({
-    id: z.string(),
-    name: z.string(),
-    file_level: z.coerce.number().min(0).max(5),
-    slave_rank: z.string(),
-    shame_role: z.string(),
-    identity: z.string(),
-    body: z.object({
-      rating: z.string(),
-      cock_cm: z.coerce.number(),
-      tags: z.array(z.string())
-    }).prefault({ rating: '未验货', cock_cm: 0, tags: [] }),
-    obedience: z.coerce.number().min(0).max(100),
-    corruption: z.coerce.number().min(0).max(100),
-    dependency: z.coerce.number().min(0).max(100),
-    arousal: z.coerce.number().min(0).max(100)
+    id: z.string().prefault(''),
+    name: z.string().prefault(''),
+    file_level: z.coerce.number().min(0).max(5).prefault(0),
+    slave_rank: z.string().prefault(''),
+    shame_role: z.string().prefault(''),
+    identity: z.string().prefault(''),
+    body_profile: z.object({
+      rating: z.string().prefault('未验货'),
+      cock_cm: z.coerce.number().prefault(0),
+      body_tags: z.array(z.string()).prefault([]),
+      sensitive_points: z.array(z.string()).prefault([]),
+      special_mods: z.array(z.string()).prefault([])
+    }).prefault({ rating: '未验货', cock_cm: 0, body_tags: [], sensitive_points: [], special_mods: [] }),
+    psych: z.object({
+      obedience: z.coerce.number().min(0).max(100).prefault(0),
+      corruption: z.coerce.number().min(0).max(100).prefault(0),
+      resistance: z.coerce.number().min(0).max(100).prefault(100),
+      dependency: z.coerce.number().min(0).max(100).prefault(0)
+    }).prefault({ obedience: 0, corruption: 0, resistance: 100, dependency: 0 }),
+    sex_state: z.object({
+      arousal: z.coerce.number().min(0).max(100).prefault(0),
+      chastity: z.string().prefault('无'),
+      anus_state: z.string().prefault('未使用'),
+      semen_state: z.string().prefault('空')
+    }).prefault({ arousal: 0, chastity: '无', anus_state: '未使用', semen_state: '空' })
   }).or(z.literal('待初始化')).prefault('待初始化'),
   archives: z.object({
     selected_profile_id: z.string(),
