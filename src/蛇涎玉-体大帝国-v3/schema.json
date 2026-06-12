@@ -11,22 +11,20 @@
       "type": "object",
       "properties": {
         "date_location": {
+          "default": "体大男生宿舍",
           "type": "string"
         },
         "scene_mode": {
+          "default": "日常",
           "type": "string"
         },
         "scene_heat": {
+          "default": 0,
           "type": "number",
           "minimum": 0,
           "maximum": 100
         }
-      },
-      "required": [
-        "date_location",
-        "scene_mode",
-        "scene_heat"
-      ]
+      }
     },
     "jade": {
       "default": {
@@ -40,31 +38,29 @@
       "type": "object",
       "properties": {
         "energy": {
+          "default": 30,
           "type": "number",
           "minimum": 0,
           "maximum": 100
         },
         "evolution": {
+          "default": "碧绿",
           "type": "string"
         },
         "known_mechanisms": {
+          "default": [],
           "type": "array",
           "items": {
             "type": "string"
           }
         },
         "ling_she_jiu_qi_unlocked": {
+          "default": 0,
           "type": "number",
           "minimum": 0,
           "maximum": 9
         }
-      },
-      "required": [
-        "energy",
-        "evolution",
-        "known_mechanisms",
-        "ling_she_jiu_qi_unlocked"
-      ]
+      }
     },
     "current_slave": {
       "default": "待初始化",
@@ -220,23 +216,21 @@
       "type": "object",
       "properties": {
         "selected_profile_id": {
+          "default": "",
           "type": "string"
         },
         "profile_count": {
+          "default": 0,
           "type": "number"
         },
         "hidden_targets": {
+          "default": [],
           "type": "array",
           "items": {
             "type": "string"
           }
         }
-      },
-      "required": [
-        "selected_profile_id",
-        "profile_count",
-        "hidden_targets"
-      ]
+      }
     }
   }
 }
